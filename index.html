@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayesha Maniyar — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12141c;
+    --ink-2:#1a1d29;
+    --paper:#edeae3;
+    --paper-dim:#a9a79f;
+    --amber:#e8a33d;
+    --teal:#4c9f92;
+    --line:#2a2e3a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--amber); color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* ---- layout shell ---- */
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---- nav ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,20,28,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:960px; margin:0 auto;
+  }
+  .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    color:var(--teal);
+  }
+  .brand span{color:var(--paper-dim);}
+  .navlinks{display:flex; gap:28px; font-size:14px;}
+  .navlinks a{
+    color:var(--paper-dim);
+    transition:color .2s ease;
+    position:relative;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--amber);}
+  .navlinks a:focus-visible{outline:2px solid var(--amber); outline-offset:4px; border-radius:2px;}
+
+  /* ---- hero / terminal signature ---- */
+  .hero{
+    padding:100px 0 80px;
+  }
+  .terminal{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:#181b26;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot:nth-child(1){background:#e06c75;}
+  .dot:nth-child(2){background:#e5c07b;}
+  .dot:nth-child(3){background:#4c9f92;}
+  .term-title{
+    margin-left:8px;
+    font-size:12px;
+    color:var(--paper-dim);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .term-body{
+    padding:28px 28px 32px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+  }
+  .term-line{color:var(--paper-dim); margin-bottom:6px;}
+  .term-line .prompt{color:var(--teal); margin-right:8px;}
+  .term-line .cmd{color:var(--paper);}
+  .term-output{
+    margin:18px 0 6px;
+  }
+  .term-output h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(32px, 5vw, 52px);
+    color:var(--paper);
+    line-height:1.1;
+    letter-spacing:-0.01em;
+  }
+  .term-output .role{
+    color:var(--amber);
+    font-size:16px;
+    margin-top:10px;
+    display:block;
+  }
+  .cursor{
+    display:inline-block;
+    width:9px; height:18px;
+    background:var(--amber);
+    margin-left:4px;
+    animation:blink 1s steps(1) infinite;
+    vertical-align:middle;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .lede{
+    max-width:560px;
+    margin-top:24px;
+    color:var(--paper-dim);
+    font-size:16px;
+  }
+
+  /* ---- section headers ---- */
+  .section{padding:70px 0;}
+  .section + .section{border-top:1px solid var(--line);}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--teal);
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    margin-bottom:10px;
+  }
+  .section h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(26px, 4vw, 36px);
+    margin-bottom:36px;
+  }
+
+  /* ---- projects ---- */
+  .projects{
+    display:grid;
+    gap:20px;
+  }
+  .project{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:26px 28px;
+    background:var(--ink-2);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .project:hover{
+    border-color:var(--teal);
+    transform:translateY(-2px);
+  }
+  .project-top{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    flex-wrap:wrap;
+  }
+  .project h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:20px;
+  }
+  .project-status{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--amber);
+    border:1px solid var(--amber);
+    padding:3px 8px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .project p{
+    color:var(--paper-dim);
+    margin-top:10px;
+    font-size:14.5px;
+    max-width:640px;
+  }
+  .stack{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top:16px;
+  }
+  .stack span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal);
+    background:rgba(76,159,146,0.1);
+    border:1px solid rgba(76,159,146,0.25);
+    padding:4px 9px;
+    border-radius:5px;
+  }
+  .project-links{
+    margin-top:16px;
+    display:flex; gap:18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+  }
+  .project-links a{
+    color:var(--paper);
+    border-bottom:1px solid var(--paper-dim);
+    padding-bottom:1px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .project-links a:hover{color:var(--amber); border-color:var(--amber);}
+
+  /* ---- skills as command list ---- */
+  .skills-list{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    display:grid;
+    gap:14px;
+  }
+  .skills-list li{list-style:none; display:flex; gap:14px; align-items:baseline;}
+  .skills-list .k{color:var(--teal); min-width:120px;}
+  .skills-list .v{color:var(--paper-dim);}
+
+  /* ---- contact ---- */
+  .contact-box{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    flex-wrap:wrap;
+  }
+  .contact-box p{color:var(--paper-dim); max-width:420px;}
+  .contact-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--amber);
+    color:var(--ink);
+    font-weight:600;
+    padding:13px 22px;
+    border-radius:6px;
+    font-size:14.5px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .contact-cta:hover{transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(232,163,61,0.5);}
+  .contact-cta:focus-visible{outline:2px solid var(--paper); outline-offset:3px;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 0 40px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:640px){
+    nav{padding:16px 20px;}
+    .navlinks{gap:16px; font-size:13px;}
+    .wrap{padding:0 20px;}
+    .term-body{padding:22px 18px 26px;}
+    .contact-box{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none; opacity:1;}
+    html{scroll-behavior:auto;}
+    .project{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">ayesha<span>.dev</span></div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="term-title">ayesha@portfolio — zsh</div>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">~$</span><span class="cmd">whoami</span></div>
+        <div class="term-output">
+          <h1>Ayesha Maniyar<span class="cursor"></span></h1>
+          <span class="role">Backend-leaning full-stack developer</span>
+        </div>
+        <p class="lede">I build small, functional web systems — the kind that book rooms, track records, and quietly stay online. Python and Flask on the server, just enough JavaScript on the front end, and a habit of reading the error log before asking for help.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="eyebrow">01 — Selected work</div>
+    <h2>Things I've shipped</h2>
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Hotel Registration System</h3>
+          <span class="project-status">in progress</span>
+        </div>
+        <p>A guest registration and room-booking system for small hotels — handles check-in records, room availability, and admin reporting from a single Flask app backed by PostgreSQL.</p>
+        <div class="stack">
+          <span>Flask</span><span>SQLAlchemy</span><span>PostgreSQL</span><span>Gunicorn</span>
+        </div>
+        <div class="project-links">
+          <a href="#">View repo →</a>
+          <a href="#">Live demo →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Task Tracker API</h3>
+          <span class="project-status">complete</span>
+        </div>
+        <p>A lightweight REST API for managing personal tasks with due dates and priority tags, built to practice clean route structure and request validation.</p>
+        <div class="stack">
+          <span>Python</span><span>Flask</span><span>SQLite</span>
+        </div>
+        <div class="project-links">
+          <a href="#">View repo →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Portfolio Site</h3>
+          <span class="project-status">complete</span>
+        </div>
+        <p>This page — a single self-contained HTML file, no build step, designed to load fast and read clearly on any device.</p>
+        <div class="stack">
+          <span>HTML</span><span>CSS</span>
+        </div>
+        <div class="project-links">
+          <a href="#">View source →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="eyebrow">02 — Toolbox</div>
+    <h2>What I work with</h2>
+    <ul class="skills-list">
+      <li><span class="k">languages</span><span class="v">Python, JavaScript, SQL, HTML/CSS</span></li>
+      <li><span class="k">backend</span><span class="v">Flask, SQLAlchemy, REST APIs, Gunicorn</span></li>
+      <li><span class="k">database</span><span class="v">PostgreSQL, SQLite</span></li>
+      <li><span class="k">deploy</span><span class="v">Render, Git, GitHub</span></li>
+      <li><span class="k">currently learning</span><span class="v">Automated testing, Docker</span></li>
+    </ul>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="eyebrow">03 — Get in touch</div>
+    <h2>Let's work together</h2>
+    <div class="contact-box">
+      <p>Open to internships, freelance backend work, or just talking through a tricky bug over email.</p>
+      <a class="contact-cta" href="mailto:hello@ayesha.dev">Send an email →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>&copy; 2026 Ayesha Maniyar</span>
+  <span>Built with HTML &amp; CSS, no framework</span>
+</footer>
+
+</body>
+</html>
